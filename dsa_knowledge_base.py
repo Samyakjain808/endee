@@ -69,5 +69,12 @@ dsa_patterns = [
         "use_cases": "Efficient pattern matching in massive documents, searching for a substring, DNA sequence matching.",
         "time_complexity": "O(N + M)",
         "space_complexity": "O(M)"
+    },
+    {
+        "name": "Two Heaps Pattern",
+        "description": "Utilizes two Priority Queues (a Max Heap and a Min Heap) to divide a set of numbers into two halves. It ensures that the elements in the first half are always smaller than or equal to the elements in the second half.",
+        "use_cases": "Finding the Running Median of a data stream, Schedule optimization problems, maximizing capital in investments.",
+        "time_complexity": "O(log N) for insertions, O(1) for finding the median",
+        "space_complexity": "O(N)"
     }
 ]

@@ -15,22 +15,26 @@ def generate_recommendation(user_problem: str, retrieved_context: list) -> str:
         context_str += f"Space Complexity: {meta.get('space_complexity', '')}\n"
         
     prompt = f"""
-You are an elite AI Software Architect and C++ expert. 
 A user has outlined the following real-world software problem:
 "{user_problem}"
 
 Based strictly on our semantic search from the Endee vector database, here are the most relevant DSA patterns available:
 {context_str}
-
-Please respond formatted in clear Markdown with the following requirements:
-1. **Algorithm Analysis:** Pick the most optimal pattern from the provided context. Explain clearly *why* it's the perfect fit for their exact problem. Mention time/space tradeoffs.
-2. **C++ Boilerplate:** Output a boilerplate C++ implementation template solving a generalized variant of the problem using the recommended data structure/algorithm.
     """
     
+    system_prompt = """You are an elite C++ Software Engineer. 
+Analyze the user's software problem and the provided Data Structure/Algorithm context.
+1. Explain concisely WHY this algorithm is the best fit.
+2. Provide a clean, compilable C++ implementation. 
+CRITICAL RULES FOR C++: 
+- Do not use iterators on std::priority_queue or std::stack. 
+- Use the 'Two Heaps' pattern (std::priority_queue and std::greater) for running median problems.
+- Ensure no data is destroyed during median calculation."""
+
     response = ollama.chat(
         model='llama3',
         messages=[
-            {'role': 'system', 'content': 'You are a master competitive programmer helping developers design optimal systems.'},
+            {'role': 'system', 'content': system_prompt},
             {'role': 'user', 'content': prompt}
         ]
     )
