@@ -1,0 +1,5 @@
+endee
+streamlit
+sentence-transformers
+ollama
+numpy
